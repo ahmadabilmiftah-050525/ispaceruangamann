@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iSpace - Ruang Aman</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+
+    <div id="view-landing" class="min-h-screen bg-white flex flex-col items-center justify-center p-8 text-center view-section active">
+        <div class="mb-12 animate-zoom-in">
+            <div class="flex items-center gap-3">
+                <div class="relative flex items-center justify-center">
+                    <i data-lucide="heart" class="text-[#1a2b6d] w-20 h-20 stroke-[2] fill-none"></i>
+                    <i data-lucide="brain" class="absolute text-[#1a2b6d] w-10 h-10"></i>
+                </div>
+                <span class="text-6xl font-serif font-bold text-[#1a2b6d] tracking-tight">iSpace</span>
+            </div>
+        </div>
+        
+        <div class="max-w-2xl mb-12 animate-fade-in">
+            <h2 class="text-[#1a2b6d] text-2xl md:text-3xl font-serif italic mb-6">
+                “ Inner Zone for Zero Judgment, Acceptance, and Healing ”
+            </h2>
+            <p class="text-gray-600 text-lg leading-relaxed">
+                Ruang aman untuk mengenali, memahami, dan mengekspresikan emosi secara jujur, karena setiap rasa pantas diberi ruang.
+            </p>
+        </div>
+
+        <button onclick="switchView('view-mood')" class="group flex items-center gap-3 px-12 py-5 bg-[#1a2b6d] text-white rounded-full font-bold text-xl hover:bg-[#2a3b7d] transition-all shadow-xl hover:-translate-y-1">
+            Masuk ke Ruang Aman
+            <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition-transform"></i>
+        </button>
+    </div>
+
+    <div id="view-mood" class="min-h-screen bg-[#f8f9fc] flex-col items-center justify-center p-6 view-section hidden">
+        <div class="max-w-4xl w-full animate-fade-in">
+            <div class="text-center mb-12 flex flex-col items-center">
+                <div class="flex items-center gap-3">
+                    <div class="relative flex items-center justify-center">
+                        <i data-lucide="heart" class="text-[#1a2b6d] w-10 h-10 stroke-[2] fill-none"></i>
+                        <i data-lucide="brain" class="absolute text-[#1a2b6d] w-5 h-5"></i>
+                    </div>
+                    <span class="text-3xl font-serif font-bold text-[#1a2b6d] tracking-tight">iSpace</span>
+                </div>
+                <h2 class="text-4xl font-serif font-bold text-[#1a2b6d] mt-8 mb-4">Bagaimana perasaanmu hari ini?</h2>
+                <p class="text-gray-500 font-medium">Pilih kondisi emosimu untuk memulai refleksi.</p>
+            </div>
+            
+            <div id="mood-grid" class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+                </div>
+            
+            <button onclick="switchView('view-landing')" class="flex items-center gap-2 mx-auto font-bold text-gray-400 hover:text-[#1a2b6d] transition-colors">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i> Kembali
+            </button>
+        </div>
+    </div>
+
+    <div id="view-journal" class="min-h-screen flex-col bg-white view-section hidden">
+        <div class="p-6 md:px-16 border-b flex justify-between items-center bg-white sticky top-0 z-20">
+            <div class="flex items-center gap-3">
+                <div class="relative flex items-center justify-center">
+                    <i data-lucide="heart" class="text-[#1a2b6d] w-10 h-10 stroke-[2] fill-none"></i>
+                    <i data-lucide="brain" class="absolute text-[#1a2b6d] w-5 h-5"></i>
+                </div>
+                <span class="text-3xl font-serif font-bold text-[#1a2b6d] tracking-tight">iSpace</span>
+            </div>
+            <div class="hidden md:flex items-center gap-3 text-gray-400">
+                <i data-lucide="calendar" class="w-[18px] h-[18px]"></i>
+                <span id="current-date" class="font-medium uppercase tracking-widest text-xs"></span>
+            </div>
+        </div>
+
+        <div class="flex-1 flex flex-col md:flex-row">
+            <div class="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-between min-h-[60vh] md:min-h-0 bg-[#fbfbfb]">
+                <div>
+                    <div class="flex items-center gap-3 mb-8">
+                        <span id="step-number" class="w-10 h-10 flex items-center justify-center bg-[#1a2b6d] text-white rounded-full font-bold text-lg">1</span>
+                        <h3 id="step-title" class="text-sm font-bold text-[#1a2b6d] uppercase tracking-[0.2em]">Title</h3>
+                    </div>
+                    
+                    <h1 id="step-question" class="text-3xl md:text-4xl font-serif font-bold text-[#1a2b6d] leading-tight mb-10">Question?</h1>
+
+                    <div id="input-area" class="animate-slide-up">
+                        <textarea id="journal-input" class="w-full p-8 bg-white border-2 border-gray-100 rounded-[32px] shadow-sm focus:border-[#1a2b6d] focus:ring-4 focus:ring-[#1a2b6d]/5 transition-all min-h-[300px] outline-none text-xl font-serif text-gray-800 placeholder:text-gray-200" placeholder="Placeholder..."></textarea>
+                    </div>
+
+                    <div id="feedback-area" class="hidden p-10 bg-[#1a2b6d] rounded-[32px] text-white shadow-2xl animate-zoom-in relative overflow-hidden">
+                        <i data-lucide="sparkles" class="absolute top-6 right-6 opacity-20 w-10 h-10"></i>
+                        <div class="flex items-center gap-3 mb-6">
+                            <i data-lucide="check-circle-2" class="text-emerald-400 w-6 h-6"></i>
+                            <h3 class="text-lg font-bold uppercase tracking-widest">Feedback Sesi</h3>
+                        </div>
+                        <p id="step-feedback" class="text-2xl font-serif italic leading-relaxed">"Feedback text here"</p>
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                    <button id="btn-process" onclick="processNext()" disabled class="w-full py-6 rounded-3xl font-bold text-xl transition-all shadow-lg bg-gray-100 text-gray-300 cursor-not-allowed">
+                        SIMPAN & LANJUT
+                    </button>
+                    <button id="btn-continue" onclick="continueToNext()" class="hidden w-full py-6 bg-emerald-500 text-white rounded-3xl font-bold text-xl hover:bg-emerald-600 transition-all transform hover:-translate-y-1 shadow-lg flex items-center justify-center gap-2">
+                        <span id="btn-continue-text">TAHAP BERIKUTNYA</span>
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="hidden md:flex w-1/2 bg-[#1a2b6d] items-center justify-center p-16 relative">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+                
+                <div class="relative z-10 w-full max-w-lg bg-white/5 backdrop-blur-md rounded-[60px] p-16 border border-white/10 text-center">
+                    <div id="visual-emoji" class="mb-10 text-8xl transition-transform duration-500 transform hover:scale-110">😊</div>
+                    <h3 id="visual-label" class="text-white text-3xl font-serif font-bold mb-6">Mood Saat Ini: ...</h3>
+                    <div class="w-16 h-1 bg-white/20 mx-auto mb-10"></div>
+                    <p id="visual-text" class="text-white/60 text-xl italic leading-relaxed">"..."</p>
+
+                    <div id="progress-dots" class="mt-12 flex justify-center gap-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="view-complete" class="fixed inset-0 bg-[#1a2b6d] z-50 flex items-center justify-center p-6 view-section hidden animate-fade-in">
+        <div class="max-w-3xl w-full bg-white p-12 md:p-20 rounded-[80px] text-center shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-4 bg-[#1a2b6d]"></div>
+            <div class="mb-10 flex justify-center">
+                <div class="flex items-center gap-3">
+                    <div class="relative flex items-center justify-center">
+                        <i data-lucide="heart" class="text-[#1a2b6d] w-20 h-20 stroke-[2] fill-none"></i>
+                        <i data-lucide="brain" class="absolute text-[#1a2b6d] w-10 h-10"></i>
+                    </div>
+                    <span class="text-6xl font-serif font-bold text-[#1a2b6d] tracking-tight">iSpace</span>
+                </div>
+            </div>
+            <h2 class="text-4xl font-serif font-bold text-[#1a2b6d] mb-8 leading-tight">Refleksi Selesai.</h2>
+            <p class="text-xl text-gray-600 mb-12 italic leading-relaxed font-serif">
+                "Apa yang kamu rasakan hari ini akan berlalu, dan kamu masih memiliki dirimu sendiri serta kesempatan untuk mengubah semuanya menjadi lebih baik."
+            </p>
+            <div class="bg-[#f8f9fc] p-8 rounded-3xl mb-12 text-gray-500 text-sm italic">
+                Tidak apa-apa jika semuanya terasa berat, di sini kamu punya ruang aman untuk memahami setiap perasaanmu.
+            </div>
+            <button onclick="window.location.reload()" class="w-full py-6 bg-[#1a2b6d] text-white text-2xl font-bold rounded-full hover:bg-[#2a3b7d] transition-all">
+                SIMPAN & TUTUP
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
